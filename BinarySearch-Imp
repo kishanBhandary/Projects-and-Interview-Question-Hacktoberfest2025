@@ -1,0 +1,224 @@
+# ==================================================
+# 01. Basic Binary Search
+# ==================================================
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+# ==================================================
+# 02. Find Minimum in Rotated Sorted Array
+# ==================================================
+def find_min_rotated(nums):
+    low, high = 0, len(nums) - 1
+    while low < high:
+        mid = (low + high) // 2
+        if nums[mid] > nums[high]:
+            low = mid + 1
+        else:
+            high = mid
+    return nums[low]
+
+# ==================================================
+# 03. Search in Rotated Sorted Array
+# ==================================================
+def search_rotated(nums, target):
+    low, high = 0, len(nums) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if nums[mid] == target:
+            return mid
+        if nums[low] <= nums[mid]:
+            if nums[low] <= target < nums[mid]:
+                high = mid - 1
+            else:
+                low = mid + 1
+        else:
+            if nums[mid] < target <= nums[high]:
+                low = mid + 1
+            else:
+                high = mid - 1
+    return -1
+
+# ==================================================
+# 04. Find Peak Element
+# ==================================================
+def find_peak(nums):
+    low, high = 0, len(nums) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if (mid == 0 or nums[mid - 1] <= nums[mid]) and (mid == len(nums) - 1 or nums[mid + 1] <= nums[mid]):
+            return mid
+        elif mid > 0 and nums[mid - 1] > nums[mid]:
+            high = mid - 1
+        else:
+            low = mid + 1
+
+# ==================================================
+# 05. First and Last Position of Element in Sorted Array
+# ==================================================
+def search_range(nums, target):
+    def find_bound(is_first):
+        low, high = 0, len(nums) - 1
+        bound = -1
+        while low <= high:
+            mid = (low + high) // 2
+            if nums[mid] == target:
+                bound = mid
+                if is_first:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            elif nums[mid] < target:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return bound
+    return [find_bound(True), find_bound(False)]
+
+# ==================================================
+# 06. Find Minimum in Rotated Sorted Array II (Duplicates)
+# ==================================================
+def find_min_rotated_duplicates(nums):
+    low, high = 0, len(nums) - 1
+    while low < high:
+        mid = (low + high) // 2
+        if nums[mid] < nums[high]:
+            high = mid
+        elif nums[mid] > nums[high]:
+            low = mid + 1
+        else:
+            high -= 1
+    return nums[low]
+
+# ==================================================
+# 07. Sqrt(x)
+# ==================================================
+def my_sqrt(x):
+    if x == 0:
+        return 0
+    low, high = 1, x
+    while low <= high:
+        mid = (low + high) // 2
+        if mid * mid == x:
+            return mid
+        elif mid * mid < x:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return high
+
+# ==================================================
+# 08. K-th Smallest Element in Sorted Matrix
+# ==================================================
+import heapq
+def kth_smallest(matrix, k):
+    n = len(matrix)
+    min_heap = []
+    for i in range(n):
+        heapq.heappush(min_heap, (matrix[i][0], i, 0))
+    while k > 0:
+        val, r, c = heapq.heappop(min_heap)
+        if c + 1 < n:
+            heapq.heappush(min_heap, (matrix[r][c + 1], r, c + 1))
+        k -= 1
+    return val
+
+# ==================================================
+# 09. Search Insert Position
+# ==================================================
+def search_insert(nums, target):
+    low, high = 0, len(nums)
+    while low < high:
+        mid = (low + high) // 2
+        if nums[mid] < target:
+            low = mid + 1
+        else:
+            high = mid
+    return low
+
+# ==================================================
+# 10. Find Peak Element in 2D Matrix
+# ==================================================
+def find_peak_2d(matrix):
+    m, n = len(matrix), len(matrix[0])
+    low, high = 0, m - 1
+    while low <= high:
+        mid = (low + high) // 2
+        max_col = max(range(n), key=lambda x: matrix[mid][x])
+        if (mid == 0 or matrix[mid][max_col] > matrix[mid - 1][max_col]) and \
+           (mid == m - 1 or matrix[mid][max_col] > matrix[mid + 1][max_col]):
+            return [mid, max_col]
+        elif mid > 0 and matrix[mid][max_col] < matrix[mid - 1][max_col]:
+            high = mid - 1
+        else:
+            low = mid + 1
+
+# ==================================================
+# 11. Median of Two Sorted Arrays
+# ==================================================
+def find_median_sorted_arrays(nums1, nums2):
+    nums = sorted(nums1 + nums2)
+    n = len(nums)
+    if n % 2 == 1:
+        return nums[n // 2]
+    else:
+        return (nums[n // 2 - 1] + nums[n // 2]) / 2
+
+# ==================================================
+# 12. Smallest Missing Positive Integer
+# ==================================================
+def first_missing_positive(nums):
+    nums = set(nums)
+    i = 1
+    while i in nums:
+        i += 1
+    return i
+
+# ==================================================
+# 13. Majority Element
+# ==================================================
+def majority_element(nums):
+    count, candidate = 0, None
+    for num in nums:
+        if count == 0:
+            candidate = num
+        count += (1 if num == candidate else -1)
+    return candidate
+
+# ==================================================
+# 14. Peak Element in Mountain Array
+# ==================================================
+def peak_index_in_mountain_array(arr):
+    low, high = 0, len(arr) - 1
+    while low < high:
+        mid = (low + high) // 2
+        if arr[mid] < arr[mid + 1]:
+            low = mid + 1
+        else:
+            high = mid
+    return low
+
+# ==================================================
+# 15. Longest Valid Parentheses
+# ==================================================
+def longest_valid_parentheses(s):
+    max_len = 0
+    stack = [-1]
+    for i, c in enumerate(s):
+        if c == '(':
+            stack.append(i)
+        else:
+            stack.pop()
+            if not stack:
+                stack.append(i)
+            else:
+                max_len = max(max_len, i - stack[-1])
+    return max_len
