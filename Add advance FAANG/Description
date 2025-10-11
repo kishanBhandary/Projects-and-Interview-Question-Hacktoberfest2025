@@ -1,0 +1,19 @@
+# Advanced Java Interview Questions
+
+**Author:** Mohit Kourav
+
+This file contains **advanced Java interview questions and examples**, commonly asked in **FAANG/Product-based company interviews**.  
+Each example includes detailed explanations and code demonstrations to help you understand:
+
+- **Core Java & OOP Concepts**
+- **Multithreading and Concurrency** (`Runnable`, `Callable`, `AtomicInteger`, `CountDownLatch`, `CyclicBarrier`)
+- **Collections & Data Structures** (`HashMap`, `PriorityQueue`, `ConcurrentHashMap`)
+- **Design Patterns** (`Singleton`, `Factory`)
+- **LRU Cache Implementation**
+
+## Uses
+
+- **Interview Preparation:** Prepare for advanced Java coding interviews.
+- **Concept Clarity:** Understand Java memory, thread-safety, and collection internals.
+- **Practical Examples:** Learn through code demonstrations with line-by-line explanations.
+- **Hacktoberfest Contribution:** Can be extended with more advanced Java questions and examples.
